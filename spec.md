@@ -1,381 +1,245 @@
 # Spec: Personalized Scholarship & Opportunity Finder
 
-> Working name: **TBD** (placeholder: "Scout"). Status: draft v0.4, 2026-10-23.
+> Working name: **TBD** (placeholder: "Scout"). Status: **draft v0.5, 2026-10-23.**
+> v0.5 descopes the project to a **5-hour prototype built in Google AI Studio with Gemini**, adds Common App as the main competitor, and moves the trained odds model, goals/tracker, and database to the roadmap. The v0.4 full design is in git history (`git show fa67d7b:spec.md`).
 
-## 1. Problem
+## 1. The idea in one line
 
-Scholarship sites like Bold.org, Fastweb, and Scholarships.com are bad at matching students to awards:
+> **Common App answers "which scholarships fit the form you filled out?" We answer "what should I do this year to win money for college?"**
 
-- **Shallow profiles.** They ask for GPA, state, and intended major, then return hundreds of generic results. A student who did varsity fencing, volunteered at a food bank, and placed at a state science fair gets the same list as everyone else in their state.
-- **Noisy results.** Lists are padded with sweepstakes-style "no essay" scholarships, sponsored listings, and awards the student isn't eligible for.
-- **Data harvesting.** Many sites exist mainly to collect student contact info for marketers.
-- **Scholarships only.** They don't show the free or cheap opportunities that build a student's profile in the first place: hackathons, company office visits, career fairs, workshops, and summer programs.
+A student pastes a few sentences about themselves and gets **local scholarships ranked by realistic odds**, plus the **free opportunities that unlock more scholarships** ("almost eligible").
 
-## 2. Existing tools and our angle
+## 2. Problem
 
-| Product | What it does | Gap |
+Everyone we interviewed (and everyone on the team) had a bad experience with scholarship sites. That isn't because nobody tried. The market is broken in ways better AI alone doesn't fix:
+
+1. **The money doesn't come from the student.** Students can't pay, so sites earn money from selling leads, from ads, or from being owned by a loan company (Sallie Mae owns Scholly). That rewards signups and page views, not wins. "No-essay" sweepstakes awards exist to collect leads.
+2. **Winnable money is hard to index.** Local awards are online, but **scattered** across school counseling PDFs, club pages, Facebook posts and foundation portals, in no standard format, with eligibility buried in prose. (They are not "only on paper"; don't claim that.)
+3. **Nobody knows who won**, so no tool learns what actually works.
+4. **Tools solve the wrong problem.** Finding isn't the hard part. Deciding what's worth applying to, writing essays, getting recommendations, tracking deadlines and starting early are.
+5. **Students use these tools for one season, then leave,** so nobody invests in quality.
+6. **Providers can't reach eligible students** either, and nobody serves them.
+
+Profiles on most sites are also shallow (GPA, state, major), so a fencer who volunteers at a food bank gets the same list as everyone else in their state, and **no scholarship site shows the free opportunities** (hackathons, STEM days, company visits) that build the record that wins scholarships.
+
+## 3. Competitors
+
+| Product | Strength | Gap |
 |---|---|---|
-| Fastweb, Bold.org, Scholarships.com | Big national databases, simple filters | Generic matches; lots of manual filtering; lead-gen "no essay" awards |
-| ScholarshipOwl | Matching + AI essay drafts | Paid; still matches on shallow profile fields |
-| Scholly | Quick mobile matching | Reviewers call its filters basic |
-| Going Merry | Matching + in-app applications | One source says it shut down in March 2026 (unconfirmed) |
-| Niche, RaiseMe | College search; RaiseMe gives micro-scholarships for achievements | Tied to specific colleges; not a general finder |
-| Extracurrify | Free AI "counselor" with ~250 curated activities + scholarships | Small curated list; not location-based or scraped |
-| MLH, Devpost, blog roundups | Hackathon listings | Scattered; nothing aimed at "free things near me for a teen" |
+| Fastweb, Scholarships.com, Niche, Cappex | Huge databases, free | Checkbox filters, noisy, stale, lead-gen business model |
+| College Board BigFuture | Trusted, vetted (~23K) | Small catalog, basic personalization, stops at a list |
+| Bold.org | Verified awards it hosts itself, clean interface | Mostly its own awards, competitive, many small no-essay prizes |
+| ScholarshipOwl | Auto-apply, AI essay drafts | Paywalled; generic drafts |
+| Scholly (now on Sallie.com) | Free mobile search | Owned by a loan company; 2026 lawsuit alleging data sales (Sallie Mae denies) |
+| Going Merry | n/a | One source says it shut down March 2026 (unconfirmed) |
+| Extracurrify | Free AI "counselor," ~250 curated activities | Small curated list; not local |
+| MLH, Devpost | Hackathon listings | Hackathons only; nothing aimed at "free things near me for a teen" |
+| **Common App scholarship matching** | **Closest rival.** In the Financial Aid section; reuses profile data students already entered, so no extra work; ~1,950 programs (2025–26); median 8 matches; reportedly ~86% local; partners Scholarship America + NSPA; doesn't share student contact info | Only Common App users, mostly seniors, US/CA/MX only; form fields only; matches arrive as notifications with no ranking or explanation; scholarships only; no help after the match |
 
-**Our angle: niche scholarships.** The big sites compete on volume of national awards that thousands of students apply to. The money that's actually winnable is in **niche and local awards** with small applicant pools: a community foundation award for one county, a scholarship from a parent's union or employer, a state bowling association award, a heritage society award, a credit union's essay contest. These are hard to find because they live on small, scattered websites, which is exactly what a scraper plus LLM extraction can fix.
+### How we differ from Common App
 
-So the product's promise is: **"the scholarships nobody else applied for, because nobody else found them."** Every design decision should favor small applicant pools over big dollar amounts.
+| | Common App | Us |
+|---|---|---|
+| Who | Common App users, mostly seniors | 9th grade through college, incl. community college, transfer, non-Common App students |
+| When | One application season | Multiple years: build the record, then apply |
+| What | Scholarships | Scholarships **+ free opportunities that build eligibility** |
+| How it matches | Structured form fields | The student's own words (catches niche hooks: parent's union, fencing, 4-H) |
+| Output | Notifications (median 8) | Ranked by expected value, with "why you match" and odds |
+| After the match | "Apply on their site" | "Almost eligible" paths, essay reuse, deadline plan |
 
-**Second angle, and the key differentiator: free discovery opportunities.** No scholarship finder shows free or low-cost things a student can just apply to and attend. Examples: a university's free women-in-STEM day (e.g. a Caltech WiSTEM-style event), local hackathons, company office visits and open houses, company-run events, and company competitions. These are often free, need only a short application, and are exactly what builds the record that wins scholarships later. Today students find them only by word of mouth.
+**Don't claim as unique** (Common App does these too): no data selling, local awards, reusing a profile, provider partnerships.
 
-## 3. Goal
-
-Let a student paste something they've already written (a personal statement, resume, or past application), answer a handful of questions, and get back:
-
-1. **Scholarships** they are realistically eligible for, ranked by how well they fit, with the reason for each match.
-2. **Discovery opportunities** near them (or online) that are free or low-cost and easy to apply to.
-
-Success for the hackathon demo: a judge enters a realistic student profile and within seconds sees a short, clearly explained list that is visibly more relevant than what Fastweb returns for the same inputs.
+**Positioning:** pitch *around* Common App, not against it. We cover the years before it, the students it doesn't reach, and the steps after a match. Students can paste their Common App activities section as the intake.
 
 ## 4. Users
 
-- **Primary:** both high school students and college undergrads (roughly 14–22). The profile asks for school level, and both scholarships and opportunities are filtered by it. Focus especially on first-generation and low-income students who don't have a counselor doing this for them.
-- **Secondary:** counselors and mentors who want to find opportunities for a group of students.
+- **Primary:** high school students and undergrads (~14–22), especially first-generation and low-income students without a counselor doing this for them.
+- **Secondary (supply side):** school counselors and local providers who want their scholarships to reach eligible students.
 
-## 5. Core features
+## 5. Prototype scope (5 hours)
 
-### 5.1 Profile intake: "paste, don't fill out"
-**Principle: ask as few questions as possible, and make almost everything optional.** Other sites make students fill out 50+ required fields before showing a single result. We read what they've already written and ask only for what's missing.
-- **Required:** only what we can't match without (ZIP and school level/grade). Everything else is optional.
-- **Lots of optional fields, never in the way:** GPA, test scores, citizenship, background checklist, connections, intended major, and so on. They live in an "improve your matches" panel the student can open any time, not in the onboarding flow.
-- Results show right after the required questions. Each optional field shows what it unlocks (*"Add GPA: +12 matches"*), so filling more in is a choice, not a gate.
+**The demo must prove:** paste a story → local scholarships ranked by realistic odds → the free opportunity that unlocks more of them → a counselor flyer turned into cards live.
 
-**Step 1 (optional): paste or upload one thing they already have** (any of). Nothing here is required, including a resume:
-- Personal statement or college essay
-- Resume or activities list (e.g. a Common App activities section)
-- A past scholarship or program application
-- LinkedIn profile PDF, or just a few sentences about themselves
+| Keep (real, working) | Fake (hardcoded but believable) | Cut (roadmap, §12) |
+|---|---|---|
+| Paste → Gemini extracts profile chips (structured JSON output) | Applicant pool sizes (estimated by hand when not published) | Live scraping inside the app (Rachel's scrapers run offline, §7) |
+| Confirm chips + 2–3 gap questions (ZIP, grade, optional GPA) | Trust badges (set by hand) | Embeddings, pgvector, database |
+| Hard eligibility filter | Demo persona | Synthetic students + trained odds model |
+| Gemini ranking + "why you matched" | | Goals, progress bars, tracker, reminders |
+| Odds band from a formula (§6.2) | | Accounts and auth |
+| **"Almost eligible" card** (opportunity → scholarships it unlocks) | | Essay clustering, map, voice intake |
+| **Counselor upload:** PDF or flyer photo → Gemini → listing cards | | URL grounding "verify" button (stretch only) |
+| Scholarships and Opportunities tabs | | Counselor view for many students |
 
-**Step 2: LLM extraction.** One LLM call pulls a structured profile out of the text:
-- Activities, sports, clubs, leadership roles
-- Volunteering (organizations and causes)
-- Competitions, awards, and honors
-- Academic interests and intended major
-- Background details the student chose to share (first-gen, heritage, family circumstances, challenges overcome)
-- Connections where niche awards hide (parent's job or union, church, Scouts / 4-H / FFA, hobbies)
-- Writing themes, useful later for matching essay prompts
+### 5.1 Intake: "paste, don't fill out"
+- **Optional paste:** personal statement, resume, activities list, or a few sentences. No document? Fall back to a chip picker.
+- **Gemini extraction** returns profile JSON: activities, sports, clubs, leadership, volunteering, awards, interests/major, background the student chose to share (first-gen, heritage), and connections where niche awards hide (parent's employer or union, church, Scouts/4-H/FFA).
+- **Confirm, don't type:** show editable chips. One click to remove or add.
+- **Ask only the gaps:** ZIP and grade (required), GPA range (optional), optional "any of these apply?" checklist.
+- **Privacy:** users may be minors. The raw document is discarded; only chips are kept. Every sensitive field is optional and says why we ask.
 
-**Step 3: confirm, don't type.** Show the extracted profile as editable chips: *"Here's what we picked up: robotics captain, food bank volunteer, first-gen, interested in mechanical engineering. Anything wrong or missing?"* The student removes or adds chips with one click.
+### 5.2 Results
+- **Two tabs:** Scholarships and Opportunities (equal weight; opportunities are a key differentiator).
+- **Each card:** title, provider, amount (or cost and what's covered), deadline, effort (essay / recs / short form), **odds band**, **"why you matched"** line, **trust badge** (§7.4), source credit, apply link.
+- **Default sort by expected value:** amount × odds ÷ effort. This pushes a $500 county award with 15 applicants above a $10K national lottery.
+- **Sweepstakes / lead-gen awards hidden by default** (`is_sweepstakes`).
 
-**Step 4: ask only the gaps (target 3–5 questions max)**, skipping any the document already answered:
-1. ZIP code (required; for local scholarships and nearby events)
-2. School level and grade (required; HS 9–12 / college year)
-3. GPA (optional; a range is fine)
-4. Optional and skippable: citizenship/residency, and an "any of these apply?" checklist (first-gen, military family, financial need, etc.), since these hard-filter lots of awards
+### 5.3 "Almost eligible" (the demo's big moment)
+An opportunity card that links to scholarships it unlocks: *"Attend this free engineering day Nov 15 → qualifies you for 3 more scholarships worth $4,500."* For the prototype, these links are hand-authored in the data (3–4 of them). This joins the two tabs into one idea: the app doesn't just find money, it helps build the record that wins it.
 
-**No document?** That's fine and fully supported. Fall back to a quick chip picker with autocomplete (sports, clubs, volunteering, awards), plus the same gap questions.
+### 5.4 Counselor upload (supply side)
+A counselor uploads a scholarship PDF or a photo of a flyer. Gemini reads it (multimodal input + structured output) and returns `Listing` records (§7.2) that appear as cards immediately. This is how the product gets the local data nobody else has. In the demo, **we play the counselor**.
 
-**Privacy:** the raw document is processed and discarded by default; we store only the extracted chips unless the student opts in to saving it (e.g. for essay reuse). Every sensitive field stays optional and is labeled with why we ask.
+## 6. Matching
 
-The profile is editable at any time and matches update live. Students can paste more documents later to enrich it.
+### 6.1 Pipeline
+1. **Eligibility filter (code):** location, class year, GPA minimum, citizenship, deadline not passed. **Unknown fields never disqualify.**
+2. **Gemini ranking:** send the filtered listings (~60 total, so no embeddings needed) plus the profile; get back a relevance score and a one-line "why you matched" per listing. This is what makes "fencing" match an "Olympic-sport athlete" award, and a parent's credit union job surface an employer scholarship.
+3. **Odds + expected value (code):** §6.2, then sort.
 
-### 5.2 Scholarship matching
-- **Hard eligibility filters** remove anything the student can't win: location, class year, GPA minimum, citizenship or residency, major, school, and deadline not passed.
-- **Relevance ranking** on what's left: how closely the scholarship's focus (sport, cause, field, identity, activity) matches the student's tags.
-- **Match % on every card** (e.g. *"88% match"*). This is a **profile-fit score**, not a chance of winning: it combines how many eligibility criteria are confirmed met and how closely the student's tags match the scholarship's focus (see §7). It needs no training data, so it's in MVP scope.
-- **Estimated odds (prototype):** e.g. *"Est. odds: ~1 in 12 (high)."* A rough heuristic, clearly labeled as an estimate, shown next to match %. A real trained model comes later once we have outcome data; see §7.2.
-- **"Why you matched" explanation** on every card (e.g. *"Matches: varsity soccer, Ohio resident, intended engineering major"*).
-- Each card shows amount, deadline, effort level (essay or no essay, recommendation letters needed), and a link to the source.
-- Sort and filter by deadline, amount, effort, and local vs. national. Local scholarships are less competitive and are the biggest gap in existing sites.
-- **Excludes junk by default:** sweepstakes and "no-essay" lead-generation awards are flagged or hidden.
+### 6.2 Odds (formula, no training)
+- **Estimated pool:** use `published_applicants` when present (Devpost registrations, provider-published counts). Otherwise start by scope (county ~40, state ~800, national ~5,000) and shrink for each extra restriction (specific activity, major, identity group, GPA floor).
+- `p ≈ num_awards / est_pool × fit adjustment` (default `num_awards = 1`).
+- **Show labels only:** Long shot / Fair / Good / High, e.g. *"High (~1 in 10)"*. Never a precise-looking %. Tooltip: *"Rough estimate from pool size and fit. Not a guarantee."*
+- First-come or no-selection opportunities show "Open: apply early" instead of odds.
 
-### 5.3 Discovery opportunities (key differentiator)
-This is a first-class tab, equal to scholarships, not an add-on.
+The v0.4 plan (synthetic applicants + trained, calibrated model) moves to the roadmap. A model trained on simulated data only learns the simulator's assumptions, which invites "so the odds are made up?" from judges. The formula shows the same idea transparently.
 
-- **What counts:** free or low-cost things a student can apply to and attend, in person nearby or online:
-  - University outreach events (e.g. women-in-STEM days like Caltech WiSTEM, engineering open houses, diversity preview weekends)
-  - Hackathons (local, school-run, and MLH-style)
-  - Company office visits, open houses, and "day in the life" tours
-  - Company events: info sessions, workshops, student summits, conferences with free student passes
-  - Company and org competitions: coding, case, design, pitch, essay, science, and math contests
-  - Pre-college and summer programs that are free or have full aid, plus fellowships and short paid programs
-- **Cost and access are front and center.** Each card shows: cost (free / $ amount), whether travel, food, or lodging is covered, how to apply (short form, essay, teacher rec, first-come), application deadline, and event date.
-- Filters: distance or online, cost, date, type, school level (HS / college), and eligibility (age, gender, grade, location).
-- **Same match % and "why you matched"** as scholarships, so a robotics student sees a hardware hackathon or a company's robotics competition first.
-- **Apply fast:** link straight to the application, with the profile summary ready to paste.
-- **Connects to scholarships:** attending some of these (competitions, programs) makes a student eligible for or more competitive for scholarships. See "almost eligible" matches in §12.
+## 7. Data
 
-### 5.4 Quick apply
-- **One-click "apply" deep link** to the real application page.
-- **Saved profile autofill helper:** a copyable summary (activities list, short bio) formatted for common application fields.
-- **Essay reuse hints (stretch):** group scholarships by similar essay prompts so one essay can be adapted for several.
-- **Tracker:** save, mark as applied or won, and get deadline reminders.
+### 7.1 What exists already (Rachel; see `rachel-progress.md`)
+- **Schema:** `scrapers/schema.py` → `Listing`. Scholarships and opportunities share one model, told apart by `kind`. Null / `[]` = unknown.
+- **Real data:** `data/listings.json`, 233 hackathons (70 MLH + 163 Devpost).
+- **Mock data:** `data/sample_listings.json`, 20 listings (12 fake, labeled "(FAKE)", plus 8 real hackathons).
+- **In progress:** Pathways to Science (105 pages scraped, waiting on LLM key), CareerOneStop (adapter written, needs token), hand-picked local pages (waiting on demo city).
+- **LLM provider decision:** **Gemini.** The extractor is OpenAI-compatible, so set `LLM_BASE_URL` to Gemini's OpenAI-compatible endpoint and `LLM_API_KEY` to an AI Studio key.
 
-### 5.5 Goals and progress
-Students set a goal and see a progress bar, so applying feels like a plan rather than an endless list.
+The scrapers stay an **offline pipeline**: they produce JSON, and the AI Studio app loads that JSON. Nothing scrapes at runtime.
 
-**Goal setup (one screen, all optional):**
-- **Money goal:** "$____ by ____" (a date, or "in N weeks / months"). E.g. *$5,000 by May 1*.
-- **Weekly application goal:** "Apply to __ scholarships and __ opportunities per week."
+### 7.2 Prototype dataset
 
-**Progress display:**
-- **Money bar:** amount won so far vs. goal, with a lighter segment for **pending** (applied, waiting to hear). Optionally a third segment for **expected value of pending** (sum of amount × estimated odds), which shows whether the student is applying to enough to realistically hit the goal.
-- **Weekly bar:** applications submitted this week vs. weekly goal, with a streak counter for weeks the goal was met.
-- **Pace check:** *"To reach $5,000 by May 1 at your current odds, apply to ~4 scholarships a week. You're at 2."* Uses the estimated odds from §7.2.
-- **This week's picks:** the top N matches, with deadlines soonest first, where N is the weekly goal. One click to apply, then one click to mark as applied.
+We have no counselor partner, so the team assembles the data. **Use real listings wherever possible:**
+- **Opportunities (all real):** MLH + Devpost (done), Pathways to Science, outreach/event pages at 2–3 universities near the demo city. Filter to free and to HS-eligible where possible.
+- **Scholarships (~70% real):** search Google for public school lists (`"[county] high school" local scholarships pdf 2026`, `"scholarship bulletin" counseling [city]`), run them through Gemini extraction, plus national awards.
+- Keep only **upcoming deadlines (Nov 2026 to spring 2027)**. Skip CareerOneStop if the token hasn't arrived.
 
-**Tracking statuses:** saved → applied → won / not selected, plus attended for opportunities. Marking won asks for the amount (defaults to the listed amount). These outcomes are also the training data for the real odds model (§7.2), so collecting them from day one matters.
+**Made-up listings, done honestly** (only to fill the demo story, e.g. the "almost eligible" chain):
+- **Made-up provider names** ("Riverside Community Foundation"). Never attach fake awards to real organizations.
+- Labeled **"Sample listing"** (keep Rachel's `(FAKE)` / `source: "sample"` convention).
+- Realistic details: local amounts $500–$2,500, real-looking eligibility, upcoming deadlines.
+- **No dead links:** sample listings point to a placeholder page.
+- The **demo flyer** for the counselor upload is made by us in Google Docs or Canva with an obviously fictional sponsor. Gemini's extraction of it is still real.
 
-Reminders (email or browser notification) for upcoming deadlines and when a student is behind their weekly goal.
+**Target:** ~40 scholarships + ~20 local/online opportunities curated for the demo (plus the hackathon set), with 3–4 "almost eligible" links. **Only synthesize** the persona and pool estimates (say they're estimated).
 
-## 6. Data pipeline
+### 7.3 Pipeline steps (one pipeline, not alternatives)
 
-### 6.1 Sources
-Start with sources that are public and allowed to be scraped or that offer an API. **Do not scrape Bold.org or Fastweb**: their ToS forbid it and the data is the thing we're competing with.
+```
+STEP 1: Starting data        STEP 2: Adding listings       STEP 3: Keeping them current
+(team, before launch)        (counselors, ongoing)         (automatic)
 
-| Type | Candidate sources |
+Scrapers + Google Sheet ──►  PDF / photo upload     ──►    URL context / grounding
+team curates listings        Gemini turns a flyer          Gemini checks provider pages
+                             into cards                    for this year's deadline
+                                     │
+                                     ▼
+                   ONE LIST OF LISTINGS → students paste their story → matches
+```
+
+- **Google Sheet:** a shared place for the team to hand-curate local listings (`data/manual_listings.json` after export). Not a user feature.
+- **Grounding** checks whether a listing is **current and complete** (this year's deadline, full eligibility, application link). It does **not** check whether a listing is publicly posted. Never drop a listing for having no web presence. If grounding conflicts with a counselor's upload, flag it; don't overwrite.
+
+### 7.4 Trust badges
+
+| Badge | Meaning |
 |---|---|
-| Scholarships | Community foundation sites (many cities have one with a local scholarship list), university financial aid "outside scholarships" pages, state higher-ed agency lists, corporate and professional association scholarship pages, CareerOneStop scholarship finder (U.S. Dept. of Labor) |
-| Niche scholarships | Union and large-employer foundation pages, Rotary/Elks/Lions/VFW chapter sites, credit unions, hobby and sports governing bodies (e.g. state bowling, chess, and 4-H/FFA associations), heritage and cultural societies, local business and newspaper award pages, high school counseling office "local scholarships" PDFs |
-| Hackathons | MLH season list, Devpost hackathon listings |
-| University outreach | University outreach, women-in-STEM, diversity, and admissions event pages (engineering schools, research institutes), department "K-12 outreach" pages |
-| Company visits, events, competitions | Company university-recruiting, student-programs, and events pages; company-run student competitions; Eventbrite / Luma / Meetup (via APIs where available) filtered to free student events |
-| Local events | Library, makerspace, museum, and community college calendars |
-| Programs | University pre-college and summer program pages (free or full-aid only), nonprofit program lists |
+| ✓ Provider confirmed | Sponsor confirmed this cycle's details |
+| ✓ Web verified | Matched to the provider's live page |
+| ● Counselor listed | From a school's list (upload date shown) |
+| ⚠ Unverified | Older than this cycle or flagged |
 
-**What's actually available (researched 2026-10-23):**
+For offline-only listings, trust comes from the source: counselor upload date, provider reconfirming each cycle, and a "deadline wrong / link broken?" flag on every card.
 
-| Source | Access | What we get | Notes |
-|---|---|---|---|
-| CareerOneStop Scholarship Finder (U.S. Dept. of Labor) | Free web API, needs a registered token | ~9,500 scholarships, fellowships, grants, prizes: name, provider, summary, level of study, amount, deadline month | Best structured base for national data. Request a token on day 1, since approval may not be instant. Mostly national, light on local awards. |
-| Pathways to Science (Institute for Broadening Participation) | Website (scrape politely or ask for data) | ~1,200–1,500 STEM programs, HS through grad, filterable by level, location, funding | Not all free; filter on funding. Good for programs and outreach events. |
-| NSF REU sites directory | Public NSF site | Paid summer research for undergrads | College only; U.S. citizens / permanent residents. |
-| Devpost | No official API; site uses an internal JSON endpoint | Hackathons: title, dates, location/online, prizes, themes | Unofficial and may change; find the endpoint in browser devtools. |
-| MLH | No API; scrape the season page | Student hackathons | Small, easy to scrape. |
-| Eventbrite | Public search API removed in 2020 | Only events by a known org, venue, or ID | Can't search "free student events near X." Use org/venue lookups for known hosts (universities, companies) instead. |
-| University outreach, company events, community foundations, counseling office lists | Scrape individual pages | The niche and local data that is our differentiator | No aggregate exists; this is the hand-picked + scraper + LLM-extraction work. |
-| Bold.org, College Board BigFuture, Fastweb | Third-party scrapers exist (e.g. on Apify) | Thousands of listings | **Don't use**: likely against their ToS, and it's the competitor's data. |
+## 8. Build: Google AI Studio
 
-**Outcome data (who applied, who won):** no public dataset exists. The closest are survey reports (e.g. Sallie's survey of ~500 applicants) and occasional program evaluations. This confirms the chance-of-winning model (§7.2) needs data we would have to collect ourselves.
+- **Build mode** generates the web app. Gemini calls run server-side with the key stored as a hidden secret.
+- **Publish to Cloud Run** for a live URL (free Starter tier: up to 2 apps, no billing). **Export to GitHub** into this repo.
+- **Three Gemini calls**, each with a JSON schema (structured output):
+  1. Pasted story → profile JSON
+  2. Filtered listings + profile → relevance + "why" per listing
+  3. Counselor PDF / flyer image → `Listing` JSON
+- **Data:** listings JSON bundled into the app.
 
-For the hackathon, a **seed dataset of ~200–500 scholarships and ~100 opportunities** from a handful of sources is enough. Plus a few hand-curated local entries for the demo city.
-
-### 6.2 Scraper
-- Python: `httpx` + `BeautifulSoup` for static pages, Playwright for JS-heavy ones.
-- One small adapter per source that outputs raw records (title, URL, raw text, source).
-- Respect `robots.txt`, rate-limit, and cache pages so we don't re-hit sites during development.
-- Scheduled re-scrape (cron / GitHub Action) to catch new listings and drop expired ones.
-
-### 6.3 Extraction and normalization
-Raw scholarship pages are messy prose. An LLM pass turns each one into a structured record:
-
-```json
-{
-  "title": "...",
-  "provider": "...",
-  "amount_min": 1000,
-  "amount_max": 1000,
-  "deadline": "2027-02-01",
-  "url": "...",
-  "eligibility": {
-    "states": ["OH"],
-    "class_years": ["HS senior"],
-    "min_gpa": 3.0,
-    "citizenship": ["US citizen", "permanent resident"],
-    "majors": ["engineering"],
-    "identity_groups": [],
-    "need_based": false
-  },
-  "focus_tags": ["soccer", "community service"],
-  "requirements": { "essay": true, "recommendations": 1, "transcript": true },
-  "is_sweepstakes": false,
-  "raw_text": "..."
-}
-```
-
-Opportunities get a similar schema with `type` (outreach event, hackathon, company visit, company event, competition, program), `host_org`, `start_date`, `application_deadline`, `location`, `is_online`, `cost`, `covers` (travel / food / lodging), `apply_effort` (short form, essay, rec, first-come), `school_levels` (HS / college), eligibility (age, grade, gender, location), and `focus_tags`.
-
-Deduplicate by URL plus fuzzy title match, since the same scholarship appears on many lists.
-
-## 7. Matching and ML
-
-Three layers, simplest first, so we have something working early and can improve it:
-
-1. **Rule-based eligibility filter** (must-have). Applies the structured `eligibility` fields against the profile. Unknown fields don't disqualify.
-2. **Semantic relevance score.** Embed the student's tags and bio, and each scholarship's `focus_tags` plus description; rank by cosine similarity. This is what makes "fencing" match a "student-athlete in an Olympic sport" scholarship that a keyword search would miss.
-   - Embeddings: an off-the-shelf embedding model (hosted API or `sentence-transformers`), stored in a vector index (pgvector, Chroma, or just numpy for the demo).
-3. **Re-rank and explain (stretch / likely demo highlight).** Send the top ~30 candidates and the profile to an LLM to re-rank and write the one-line "why you matched" text. Cache results per profile.
-
-### 7.1 Match % (MVP)
-The percentage on each card, for both scholarships and opportunities. No training needed:
-
-```
-match % = 100 × (w1 × eligibility_confidence + w2 × relevance)
-```
-
-- `eligibility_confidence`: share of the listing's eligibility criteria the profile is confirmed to meet. Unknowns count as partial, not zero.
-- `relevance`: embedding similarity between profile and listing, rescaled to 0–1 across the candidate set.
-- Start with `w1 = 0.4, w2 = 0.6` and tune by eye on test profiles. Label it **"match"**, never "chance of winning."
-
-### 7.2 Odds of getting it
-
-We don't yet know how much outcome data we can get (no public applicant/winner dataset exists, see §6.1), so this is built in two stages behind the same interface, `estimate_odds(profile, listing) -> {p, low, high, label, reasons}`. The UI doesn't care which stage is behind it.
-
-**Stage 1: model trained on synthetic data (hackathon prototype).** We have real listings but no real outcomes, so we simulate application rounds, then train a real model on the simulated outcomes. This proves the full ML pipeline (features → training → calibrated odds → UI) works, so swapping in real data later is a data change, not a rebuild.
-
-*Step 1: simulation assumptions.* These encode what we believe drives odds, and they are the generator, not the model:
-- `est_applicants` per listing, from how narrow eligibility is. Start from a pool size by geographic scope (e.g. national ~5,000, state ~800, county or one school ~40), then shrink it for each extra restriction (specific activity, major, identity group, GPA floor). Use the provider's published applicant count when the listing has one.
-- `num_awards` per listing, extracted from the listing (default 1).
-- Effort: essay, recs, or interview required → fewer applicants finish; "no essay" → huge pools.
-- For opportunities: capacity (seats) if listed; first-come / no-selection events let nearly everyone who applies in time get in.
-
-*Step 2: generate synthetic applicants.*
-- Create a few thousand synthetic student profiles by sampling realistic distributions: grade, GPA, state/county, number and type of activities, leadership roles, awards, first-gen, and so on. For variety, also have an LLM write ~100–200 short persona descriptions, then run them through the same extraction as real intake (§5.1), which also tests that pipeline.
-- For each real listing, draw an applicant pool of size `est_applicants` from the synthetic students who are eligible.
-
-*Step 3: simulate who wins.*
-- Give each applicant a hidden "strength" score for that listing: match % (§7.1) + GPA + leadership/awards + essay quality (random, since we can't see it) + noise.
-- The top `num_awards` applicants by strength win. Everyone else in the pool is "not selected."
-- Output: a table of (student features, listing features, won 0/1), probably 100k+ rows.
-
-*Step 4: train and calibrate.*
-- Features: match %, eligibility confidence, est. pool size, num_awards, effort level, scope (local / state / national), GPA, activity and award counts, leadership flag.
-- Model: logistic regression first (explainable), then try gradient-boosted trees (e.g. LightGBM / XGBoost) if time allows.
-- Hold out a test split; report AUC and a calibration plot. Calibrate with isotonic or Platt scaling.
-- Use feature importances or SHAP to generate the "why" text: *"Your odds are good mainly because this is county-only and you match its robotics focus."*
-
-*Honesty note:* a model trained on synthetic data can only learn the assumptions we put into the simulator. It shows that the pipeline works, not that the numbers are true. The UI and pitch both say so ("prototype estimate, trained on simulated data").
-
-*Fallback:* the Step 1 assumptions also work on their own as a direct formula (`p ≈ num_awards / est_applicants × fit adjustment`) if training isn't ready in time.
-
-**Display:** never a precise-looking "87%". Show a band plus a plain-language range: *"Est. odds: High (~1 in 8)"* with a tooltip *"Rough estimate based on how many people are likely eligible and how well you fit. Not a guarantee."* Labels: Long shot / Fair / Good / High.
-
-**Validation for the demo:** hand-check 10–20 listings where the provider publishes applicant counts or past winner counts, and sanity-check that the simulated pool sizes and odds are in the right ballpark.
-
-**Stage 2: same model, real data (after launch).** Once users report outcomes (§5.5 tracker: applied → won / not selected):
-- Training data: (profile features, listing features, outcome) per application. Supplement with partner providers or counselors who share applicant counts and results.
-- Same features and training code as Stage 1. Options: retrain on real data only, or pretrain on synthetic data and fine-tune / reweight toward real outcomes as they come in.
-- Compare real outcomes against the simulator to find which assumptions were wrong, and fix the simulator too.
-- Calibrate (e.g. isotonic or Platt scaling) so "1 in 8" really means about 1 in 8 across similar applications.
-- Switch from Stage 1 to Stage 2 per listing type only once there's enough data for that type; otherwise keep the synthetic-trained model.
-
-**How much data is enough?** Unknown yet; that's the open question. Rough guide: a few hundred labeled outcomes for a coarse model, thousands for anything per-category. Until then, the synthetic-trained Stage 1 model stays on, and the pitch presents Stage 2 as the roadmap.
-
-### 7.3 Other ML ideas if time allows
-- **Sweepstakes / low-quality classifier** to flag lead-gen "scholarships."
-- **Feedback loop:** saves, hides, and applies are used to tune ranking.
-
-## 8. Architecture
-
-```
-[Scrapers (Python, scheduled)] --> [LLM extraction + dedupe] --> [Postgres + pgvector]
-                                                                       |
-[Web app (Next.js)] <--> [API (FastAPI or Next.js routes)] <-----------+
-        |                         |
-   profile intake           match: filter -> embed rank -> LLM rerank/explain
-```
-
-Proposed default stack (change freely):
-- **Frontend:** Next.js + Tailwind
-- **Backend:** FastAPI (Python, which keeps scraper, ML, and API in one language) or Next.js API routes if the team prefers JS end to end
-- **DB:** Postgres with pgvector (Supabase gives this plus auth for free)
-- **LLM / embeddings:** one hosted provider for extraction, embeddings, and rerank
-- **Hosting:** Vercel (frontend) + Render / Fly / Railway (Python API and scraper jobs)
+**Build mode tips**
+- **One small change per prompt.** Long prompts get shrunk or ignored, and big prompts break working parts.
+- **Checkpoint / export to GitHub after each working feature.**
+- **Never let Gemini make up listings at runtime**; it only reads the bundled data.
+- **Cache the demo persona's results** as a fallback for rate limits, and record a backup video.
+- AI Studio is built for **one person editing at a time**. One driver owns the app; everyone else prepares prompts, data and designs. Check in the first 10 minutes whether shared editing exists.
 
 ## 9. Privacy and safety
 
-- Users may be minors. Collect the minimum, make all identity and background fields optional, and never sell or share data.
-- Don't require an account to see matches; an account is only for saving and tracking.
-- Label what each sensitive field is used for ("used only to find scholarships restricted to this group").
-- Link out to official applications; we don't collect application materials or payment info.
-- Flag listings that charge an application fee, which is a common scam signal.
+- Users may be minors. Collect the minimum, keep every identity field optional, never sell or share data.
+- No account needed to see matches.
+- Link out to official applications; collect no application materials or payment info.
+- Flag application fees, SSN requests and lead-gen "no essay" awards as scam signals.
 
-## 10. Hackathon scope
+## 10. Team
 
-**MVP (must ship for demo):**
-- [ ] Paste/upload intake: LLM extracts profile → confirm chips → 3–5 gap questions
-- [ ] Odds model, Stage 1: simulate applicants and outcomes, train and calibrate on synthetic data (§7.2), shown as a labeled band
-- [ ] Goal setup + money and weekly progress bars, with the applied/won tracker
-- [ ] Seed dataset: scraped and LLM-normalized scholarships + opportunities from 3–5 sources each, with a strong set of free outreach events, hackathons, company visits, and competitions for the demo area
-- [ ] Eligibility filter + embedding ranking + match %
-- [ ] Results page with scholarship and opportunity tabs, match %, "why you matched" text, deadline/amount/effort (or cost/what's covered), apply link
-- [ ] Location and cost filters for opportunities
-- [ ] HS / college toggle
+| Who | Owns |
+|---|---|
+| **Bianca:** design | Sketches of the 3 screens (intake, results with two tabs, counselor upload); UI prompts for the driver; card design incl. odds band, trust badge, "almost eligible" card |
+| **Rachel:** data | Running the scrapers with a Gemini key; demo-city curation (Sheet → `manual_listings.json`); a real local PDF; the demo flyer; "almost eligible" links; pool estimates; trust badges |
+| **Person 3:** matching | Eligibility filter, ranking prompt + JSON schema, odds formula, expected-value sort, "almost eligible" logic. Tests prompts in AI Studio's prompt playground first |
+| **Person 4:** AI Studio driver | Owns the Build mode app; applies prompts, data and designs; Cloud Run publish; GitHub export; cached fallback |
+| **Person 5:** AI intake | Profile extraction prompt + schema, gap-question logic, counselor-upload extraction prompt, the demo persona (realistic first-gen student paragraph) |
 
-**Stretch:**
-- [ ] LLM rerank
-- [ ] Deadline and behind-on-goal reminders
-- [ ] Essay-prompt clustering
-- [ ] Sweepstakes classifier
-- [ ] Map view of nearby opportunities
-- [ ] Counselor view for multiple students
+**Presentation is shared.** Each person makes the slide(s) and demo segment for their part; the team assembles and rehearses together.
 
-**Future (pitch as roadmap):**
-- [ ] Stage 2: retrain the odds model on real reported outcomes (§7.2)
+**Contracts (first 30 minutes):** listing schema = `scrapers/schema.py` (done). Person 5 commits the profile schema + 2 sample profiles. Person 3 and Person 5 hand finished prompts to Person 4 as text.
 
-## 11. Demo script (draft)
+### Timeline (5 hours)
+- **0:00–0:30, all together:** pick the demo city, confirm schemas, write the persona. Driver gives Build mode the skeleton prompt: *"Scholarship matcher: paste-your-story intake → editable profile chips → ranked results with Scholarships and Opportunities tabs, using local JSON data."*
+- **0:30–2:30:** driver builds screens; Rachel curates data; Persons 3 and 5 refine prompts in the playground.
+- **2:30–3:30:** load real data and prompts; add "almost eligible" and counselor upload.
+- **3:30:** publish to Cloud Run, export to GitHub.
+- **4:00: FEATURE FREEZE.** Anything not working by 3:30 gets hardcoded.
+- **4:00–5:00:** polish copy, record backup video, rehearse 3+ times.
 
-1. Show Fastweb (or a screenshot) for a sample student: long generic list.
-2. Paste the same student's personal statement into our app. In seconds it shows extracted chips (fencing, food bank volunteer, robotics captain, first-gen) and asks only ZIP, grade, and GPA.
-3. Show a short ranked list with match %, estimated odds, and local scholarships at the top, with clear "why you matched" text.
-4. **Switch to Opportunities (the big moment):** a free university women-in-STEM day, a local hackathon, and a company office visit nearby this month, each marked free, with what's covered, and one click to apply. Point out that no scholarship site shows these.
-5. Quick look at the pipeline: raw scraped page → structured record, and the odds model's calibration plot and top features (trained on simulated data).
-6. Set a goal ("$5,000 by May 1, 3 applications a week"), mark two as applied, and watch the progress bars and pace check update.
-7. Close with the roadmap: the same model retrains on real outcomes as students report them.
+## 11. Demo (3 minutes)
 
-## 12. Ideas backlog / future improvements
-Not committed; pull into scope as time allows.
-- **Voice intake:** the student talks about themselves instead of typing ("I do robotics, I volunteer at the food bank on weekends…"). Speech-to-text, then the same LLM extraction as a pasted document (§5.1). Also usable for adding to the profile later. Optional, like every other input.
-- **Resume upload (optional, never required):** if it's not in the first version, add PDF/DOCX resume upload that feeds the same extraction. Students without a resume skip it with no penalty.
-- **Rank by expected value:** amount × estimated odds ÷ effort, using applicant-pool size.
-- **"Almost eligible" matches:** "join FFA or attend this competition and you'd qualify for 3 more scholarships." Links the opportunities tab to scholarships.
-- **Interview-style intake:** a short chat that asks follow-ups to surface niche connections (parent's employer or union, specific volunteer org).
-- **Counselor PDF upload:** parse a school's local scholarship list into structured records.
-- **Student-submitted listings:** students add scholarships and events they found or won.
-- **Predict reopening of yearly awards and events:** "opened in January last year; we'll remind you."
-- **Essay prompt clustering** and **calendar (.ics) export.**
-- **Scam flags:** application fees, SSN requests, lead-gen "no essay" awards.
+1. **Problem (30s):** a quote from our interviews + a screenshot of Fastweb's generic list.
+2. **Intake (30s):** paste the persona → chips appear (robotics, food bank, first-gen, parent works at a credit union) → ZIP + grade.
+3. **Results (45s):** local awards on top: *"High odds (~1 in 10), county-only, matches robotics."* Contrast with Common App's "8 notifications."
+4. **Big moment (45s):** "almost eligible": free engineering day → 3 more scholarships worth $4,500.
+5. **Supply side (20s):** upload the counselor flyer → cards appear live. *"This is how we get the data nobody else has."*
+6. **Close (10s):** the one-liner from §1. *"Built on Google AI Studio and Gemini."*
 
-## 13. Team and ownership
+### Judge Q&A
+- **"How is this different from Common App?"** The one-liner + we cover 9th grade onward, opportunities, and the steps after a match.
+- **"Where does the data come from at scale?"** Counselors and providers upload it (as shown), our scrapers cover public sources, and Gemini grounding keeps it current.
+- **"Is this data real?"** *"The opportunities and most scholarships are real, current listings. A few local ones are illustrative so the demo shows the full flow, and they're labeled. The extraction you saw is live."*
+- **"Are the odds real?"** *"A transparent estimate from eligible pool size; we never show a fake precise %. Real odds come from providers reporting winners, which is on the roadmap."*
+- **"How do you know listings are current?"** Trust badges, providers reconfirming each cycle, student flags.
+- **"How do you make money without selling data?"** Grants, school or district licenses, foundation funding. Free for students, always.
+- **"Why AI and not filters?"** Fencing → Olympic-sport athlete award; parent's credit union job → employer scholarship. Filters miss both.
 
-Five people. Each role owns a slice end to end, and the slices meet at two shared schemas (listing and profile) that are agreed on in the first hour, so nobody waits on anyone else.
+**Avoid:** "billions in scholarships go unclaimed" (widely called a myth) and "local awards only exist on paper."
 
-| Who | Role | Owns | Spec sections |
-|---|---|---|---|
-| **Bianca** | Design + frontend | Visual design, intake flow (paste → chips → gap questions), results page with scholarship and opportunity tabs, cards (match %, odds band, "why you matched"), "improve your matches" panel | §5.1–5.4 UI |
-| **Rachel** | Data | Scrapers and source adapters, CareerOneStop API, Devpost/MLH, Pathways to Science, hand-picked local scholarships and free events for the demo region, LLM extraction of listings into the listing schema, dedupe, the seed dataset | §6 |
-| **Person 3** | ML: matching + odds model | Eligibility filter, embeddings and match %, odds model training + calibration on Person 5's simulated data, "why" text from feature importances, the calibration plot for the demo | §7.1, §7.2 (training) |
-| **Person 4** | Backend + goals/tracker logic | DB (Postgres + pgvector), API endpoints, saved profiles, tracker statuses, goals and progress calculations including the pace check (calls `estimate_odds`), deployment, and wiring everything together at integration | §5.5 logic, §8 |
-| **Person 5** | AI intake + synthetic data | LLM extraction of the student profile from a pasted document, gap-question logic (which of the 3–5 questions to ask), synthetic student generator (sampled profiles + LLM-written personas run through the same extraction), outcome simulator that produces the training table for Person 3, and the demo persona | §5.1 logic, §7.2 (simulation) |
+## 12. Roadmap (pitch only, don't build)
 
-Goals/progress UI (bars, pace check, tracker) goes to Bianca along with the rest of the frontend; Person 4 helps wire it up if Bianca is overloaded.
+- **Two-sided local scholarship network:** counselors and providers post for free → students matched → **providers report winners** → real odds data.
+- **Trained odds model:** v0.4 §7.2 plan (synthetic pretraining, then real outcomes, calibrated), once outcome data exists.
+- Goals, progress bars, pace check, applied/won tracker, deadline reminders.
+- Scheduled scraping, CareerOneStop national data, database + embeddings for scale.
+- Essay-prompt clustering ("one essay covers these 5 awards"), voice intake, resume upload.
+- Counselor view for many students, Google Maps for nearby opportunities, grounding-based "verify" button.
+- Predicting when yearly awards reopen, student-submitted listings, scam classifier.
 
-**Presentation is shared.** No single owner. Each person makes the slide(s) and demo segment for their own part, and the whole team assembles and rehearses the deck together in the polish phase.
+## 13. Open questions
 
-**Handoffs and contracts (hour 1, everyone):**
-- **Listing schema** (§6.3): Rachel produces it; Persons 3, 4, and 5 consume it. Rachel commits ~20 hand-written sample listings in the first hour so the others can build against real-shaped data right away.
-- **Profile schema:** Person 5 defines it (output of extraction); Persons 3, 4, and Bianca consume it. Same rule: commit a few sample profiles early.
-- **Training table:** Person 5 hands Person 3 a first small simulated dataset (even a few thousand rows) early in the build phase, then a bigger, more realistic one later, so Person 3 isn't blocked on the simulator.
-- **API shape:** Person 4 publishes the endpoints (`POST /profile/extract`, `GET /matches`, `POST /applications`, `GET /goals/progress`). Bianca builds against mock JSON until it's live.
-- **Odds interface:** `estimate_odds(profile, listing)` (§7.2). Person 3 ships the plain-formula fallback first, then swaps in the trained model behind the same function.
-
-**Rough timeline (adjust to hackathon length):**
-1. **Kickoff (first ~1–2 h):** agree on schemas, pick the demo city, set up repo, request the CareerOneStop token, create the mock data.
-2. **Build (first half):** everyone works in parallel against the mocks. Rachel aims for ~100 real listings by the midpoint.
-3. **Integrate (midpoint):** swap mocks for real API and data; Person 3 swaps the fallback formula for the trained model.
-4. **Polish (last quarter):** feature freeze, end-to-end QA, everyone builds and rehearses the presentation together.
-
-**If someone finishes early:** Rachel → hand-pick more local opportunities for the demo region; Person 3 → LLM rerank; Person 4 → reminders; Person 5 → voice intake or resume upload (§12).
-
-## 14. Open questions
-
-- Names for Persons 3–5, and does the split fit their skills?
-- U.S.-only to start? Which demo city for local data?
-- Python backend or all-JS?
-- Which LLM / embedding provider (and whose API credits)?
+- Names for Persons 3–5.
+- Demo city (blocks Rachel's local curation).
+- Whose AI Studio account drives the app; Gemini key for the scrapers.
+- Does AI Studio Build mode support shared editing?
 - Name and branding.
-- Do we need accounts at all for the demo, or just local storage?
-- How do we tell HS vs. college eligibility apart when a listing doesn't say?
-- How much outcome data can we get for the odds model, and from where (user reports, partner providers, counselors)?
-- Which document types do we support at launch (paste text only, or PDF/DOCX upload too)?
