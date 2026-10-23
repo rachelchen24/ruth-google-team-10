@@ -46,9 +46,12 @@ Success for the hackathon demo: a judge enters a realistic student profile and w
 ## 5. Core features
 
 ### 5.1 Profile intake: "paste, don't fill out"
-**Principle: as few questions as possible.** Other sites make students fill out 50+ fields. We read what they've already written and ask only for what's missing.
+**Principle: ask as few questions as possible, and make almost everything optional.** Other sites make students fill out 50+ required fields before showing a single result. We read what they've already written and ask only for what's missing.
+- **Required:** only what we can't match without (ZIP and school level/grade). Everything else is optional.
+- **Lots of optional fields, never in the way:** GPA, test scores, citizenship, background checklist, connections, intended major, and so on. They live in an "improve your matches" panel the student can open any time, not in the onboarding flow.
+- Results show right after the required questions. Each optional field shows what it unlocks (*"Add GPA: +12 matches"*), so filling more in is a choice, not a gate.
 
-**Step 1: paste or upload one thing they already have** (any of):
+**Step 1 (optional): paste or upload one thing they already have** (any of). Nothing here is required, including a resume:
 - Personal statement or college essay
 - Resume or activities list (e.g. a Common App activities section)
 - A past scholarship or program application
@@ -66,12 +69,12 @@ Success for the hackathon demo: a judge enters a realistic student profile and w
 **Step 3: confirm, don't type.** Show the extracted profile as editable chips: *"Here's what we picked up: robotics captain, food bank volunteer, first-gen, interested in mechanical engineering. Anything wrong or missing?"* The student removes or adds chips with one click.
 
 **Step 4: ask only the gaps (target 3–5 questions max)**, skipping any the document already answered:
-1. ZIP code (for local scholarships and nearby events)
-2. School level and grade (HS 9–12 / college year)
+1. ZIP code (required; for local scholarships and nearby events)
+2. School level and grade (required; HS 9–12 / college year)
 3. GPA (optional; a range is fine)
-4. Anything that hard-filters lots of awards and wasn't in the text: citizenship/residency, and an optional "any of these apply?" checklist (first-gen, military family, financial need, etc.)
+4. Optional and skippable: citizenship/residency, and an "any of these apply?" checklist (first-gen, military family, financial need, etc.), since these hard-filter lots of awards
 
-**No document?** Fall back to a quick chip picker with autocomplete (sports, clubs, volunteering, awards), plus the same gap questions.
+**No document?** That's fine and fully supported. Fall back to a quick chip picker with autocomplete (sports, clubs, volunteering, awards), plus the same gap questions.
 
 **Privacy:** the raw document is processed and discarded by default; we store only the extracted chips unless the student opts in to saving it (e.g. for essay reuse). Every sensitive field stays optional and is labeled with why we ask.
 
@@ -321,8 +324,10 @@ Proposed default stack (change freely):
 6. Set a goal ("$5,000 by May 1, 3 applications a week"), mark two as applied, and watch the progress bars and pace check update.
 7. Close with the roadmap: the same model retrains on real outcomes as students report them.
 
-## 12. Ideas backlog
+## 12. Ideas backlog / future improvements
 Not committed; pull into scope as time allows.
+- **Voice intake:** the student talks about themselves instead of typing ("I do robotics, I volunteer at the food bank on weekends…"). Speech-to-text, then the same LLM extraction as a pasted document (§5.1). Also usable for adding to the profile later. Optional, like every other input.
+- **Resume upload (optional, never required):** if it's not in the first version, add PDF/DOCX resume upload that feeds the same extraction. Students without a resume skip it with no penalty.
 - **Rank by expected value:** amount × estimated odds ÷ effort, using applicant-pool size.
 - **"Almost eligible" matches:** "join FFA or attend this competition and you'd qualify for 3 more scholarships." Links the opportunities tab to scholarships.
 - **Interview-style intake:** a short chat that asks follow-ups to surface niche connections (parent's employer or union, specific volunteer org).
