@@ -337,9 +337,35 @@ Not committed; pull into scope as time allows.
 - **Essay prompt clustering** and **calendar (.ics) export.**
 - **Scam flags:** application fees, SSN requests, lead-gen "no essay" awards.
 
-## 13. Open questions
+## 13. Team and ownership
 
-- Team split: who owns scraper, ML/matching, backend, frontend?
+Five people. Each role owns a slice end to end, and the slices meet at two shared schemas (listing and profile) that are agreed on in the first hour, so nobody waits on anyone else.
+
+| Who | Role | Owns | Spec sections |
+|---|---|---|---|
+| **Bianca** | Design + frontend | Visual design, intake flow (paste → chips → gap questions), results page with scholarship and opportunity tabs, cards (match %, odds band, "why you matched"), "improve your matches" panel | §5.1–5.4 UI |
+| **Rachel** | Data | Scrapers and source adapters, CareerOneStop API, Devpost/MLH, Pathways to Science, hand-picked local scholarships and free events for the demo region, LLM extraction of listings into the listing schema, dedupe, the seed dataset | §6 |
+| **Person 3** | ML: matching + odds | Eligibility filter, embeddings and match %, synthetic student generator and outcome simulator, odds model training + calibration, "why" text from feature importances, the calibration plot for the demo | §7 |
+| **Person 4** | Backend + profile extraction | DB (Postgres + pgvector), API endpoints, LLM extraction of the student profile from a pasted document, gap-question logic, saved profiles, deployment | §5.1 logic, §8 |
+| **Person 5** | Goals/tracker + pitch | Goal setup, money and weekly progress bars, pace check, tracker statuses (frontend + API, pairing with Bianca on look and feel); then the demo script, pitch deck, demo persona (personal statement + profile), and end-to-end QA | §5.5, §11 |
+
+**Handoffs and contracts (hour 1, everyone):**
+- **Listing schema** (§6.3): Rachel produces it; Person 3 and Person 4 consume it. Rachel commits ~20 hand-written sample listings in the first hour so the others can build against real-shaped data right away.
+- **Profile schema:** Person 4 defines it (output of extraction); Person 3 and Bianca consume it. Same rule: commit a few sample profiles early.
+- **API shape:** Person 4 publishes the endpoints (`POST /profile/extract`, `GET /matches`, `POST /applications`, `GET /goals/progress`). Bianca and Person 5 build against mock JSON until it's live.
+- **Odds interface:** `estimate_odds(profile, listing)` (§7.2). Person 3 ships the plain-formula fallback first, then swaps in the trained model behind the same function.
+
+**Rough timeline (adjust to hackathon length):**
+1. **Kickoff (first ~1–2 h):** agree on schemas, pick the demo city, set up repo, request the CareerOneStop token, create the mock data.
+2. **Build (first half):** everyone works in parallel against the mocks. Rachel aims for ~100 real listings by the midpoint.
+3. **Integrate (midpoint):** swap mocks for real API and data; Person 3 swaps the fallback formula for the trained model.
+4. **Polish (last quarter):** feature freeze, demo persona run-throughs, pitch rehearsal. Person 5 drives this.
+
+**If someone finishes early:** Rachel → hand-pick more local opportunities for the demo region; Person 3 → LLM rerank; Person 4 → voice intake or resume upload (§12); Person 5 → reminders.
+
+## 14. Open questions
+
+- Names for Persons 3–5, and does the split fit their skills?
 - U.S.-only to start? Which demo city for local data?
 - Python backend or all-JS?
 - Which LLM / embedding provider (and whose API credits)?
