@@ -1,0 +1,1292 @@
+[
+ {
+  "id": "547effdd84dd",
+  "kind": "scholarship",
+  "title": "Franklin County Food Bank Volunteer Scholarship",
+  "provider": "Columbus Area Community Foundation (FAKE)",
+  "url": "https://example.org/sample/1",
+  "source": "sample",
+  "summary": "For Franklin County seniors with 50+ hours volunteering on hunger relief.",
+  "school_levels": [
+   "HS"
+  ],
+  "scope": "local",
+  "eligibility": {
+   "states": [
+    "OH"
+   ],
+   "counties": [
+    "Franklin County, OH"
+   ],
+   "class_years": [
+    "HS 12"
+   ],
+   "min_gpa": 2.5,
+   "citizenship": [],
+   "majors": [],
+   "identity_groups": [],
+   "need_based": null,
+   "min_age": null,
+   "max_age": null,
+   "gender": []
+  },
+  "focus_tags": [
+   "community service",
+   "food insecurity",
+   "volunteering"
+  ],
+  "amount_min": 1500.0,
+  "amount_max": 1500.0,
+  "num_awards": 2,
+  "deadline": "2027-03-01",
+  "requirements": {
+   "essay": true,
+   "recommendations": 1,
+   "transcript": true,
+   "interview": null,
+   "application_fee": null
+  },
+  "is_sweepstakes": false,
+  "type": null,
+  "start_date": null,
+  "end_date": null,
+  "application_deadline": null,
+  "location": null,
+  "is_online": null,
+  "cost": null,
+  "covers": [],
+  "apply_effort": [],
+  "capacity": null,
+  "published_applicants": null,
+  "raw_text": null,
+  "scraped_at": null
+ },
+ {
+  "id": "99bb8b5be4a7",
+  "kind": "scholarship",
+  "title": "Ohio State Bowling Association Youth Scholarship",
+  "provider": "Ohio State USBC (FAKE)",
+  "url": "https://example.org/sample/2",
+  "source": "sample",
+  "summary": "For Ohio youth bowlers who are USBC members.",
+  "school_levels": [
+   "HS"
+  ],
+  "scope": "state",
+  "eligibility": {
+   "states": [
+    "OH"
+   ],
+   "counties": [],
+   "class_years": [
+    "HS 11",
+    "HS 12"
+   ],
+   "min_gpa": null,
+   "citizenship": [],
+   "majors": [],
+   "identity_groups": [],
+   "need_based": null,
+   "min_age": null,
+   "max_age": null,
+   "gender": []
+  },
+  "focus_tags": [
+   "bowling",
+   "sports"
+  ],
+  "amount_min": 500.0,
+  "amount_max": 1000.0,
+  "num_awards": 6,
+  "deadline": "2027-04-15",
+  "requirements": {
+   "essay": true,
+   "recommendations": 1,
+   "transcript": null,
+   "interview": null,
+   "application_fee": null
+  },
+  "is_sweepstakes": false,
+  "type": null,
+  "start_date": null,
+  "end_date": null,
+  "application_deadline": null,
+  "location": null,
+  "is_online": null,
+  "cost": null,
+  "covers": [],
+  "apply_effort": [],
+  "capacity": null,
+  "published_applicants": null,
+  "raw_text": null,
+  "scraped_at": null
+ },
+ {
+  "id": "d2a4daa55de8",
+  "kind": "scholarship",
+  "title": "Local 18 Operating Engineers Family Scholarship",
+  "provider": "IUOE Local 18 (FAKE)",
+  "url": "https://example.org/sample/3",
+  "source": "sample",
+  "summary": "For children of Local 18 union members entering college or trade school.",
+  "school_levels": [
+   "HS",
+   "college"
+  ],
+  "scope": "state",
+  "eligibility": {
+   "states": [
+    "OH",
+    "KY"
+   ],
+   "counties": [],
+   "class_years": [
+    "HS 12",
+    "college 1"
+   ],
+   "min_gpa": null,
+   "citizenship": [],
+   "majors": [],
+   "identity_groups": [
+    "union family"
+   ],
+   "need_based": null,
+   "min_age": null,
+   "max_age": null,
+   "gender": []
+  },
+  "focus_tags": [
+   "trades",
+   "union family"
+  ],
+  "amount_min": 2000.0,
+  "amount_max": 2000.0,
+  "num_awards": 10,
+  "deadline": "2027-02-15",
+  "requirements": {
+   "essay": true,
+   "recommendations": null,
+   "transcript": true,
+   "interview": null,
+   "application_fee": null
+  },
+  "is_sweepstakes": false,
+  "type": null,
+  "start_date": null,
+  "end_date": null,
+  "application_deadline": null,
+  "location": null,
+  "is_online": null,
+  "cost": null,
+  "covers": [],
+  "apply_effort": [],
+  "capacity": null,
+  "published_applicants": null,
+  "raw_text": null,
+  "scraped_at": null
+ },
+ {
+  "id": "5041a9ed4e72",
+  "kind": "scholarship",
+  "title": "First-Gen Engineers Scholarship",
+  "provider": "Society of Example Engineers (FAKE)",
+  "url": "https://example.org/sample/4",
+  "source": "sample",
+  "summary": "For first-generation college students majoring in engineering.",
+  "school_levels": [
+   "college"
+  ],
+  "scope": "national",
+  "eligibility": {
+   "states": [],
+   "counties": [],
+   "class_years": [
+    "college 1",
+    "college 2",
+    "college 3"
+   ],
+   "min_gpa": 3.0,
+   "citizenship": [
+    "US citizen",
+    "permanent resident"
+   ],
+   "majors": [
+    "engineering"
+   ],
+   "identity_groups": [
+    "first-gen"
+   ],
+   "need_based": true,
+   "min_age": null,
+   "max_age": null,
+   "gender": []
+  },
+  "focus_tags": [
+   "engineering",
+   "first-gen",
+   "stem"
+  ],
+  "amount_min": 5000.0,
+  "amount_max": 5000.0,
+  "num_awards": 20,
+  "deadline": "2027-01-31",
+  "requirements": {
+   "essay": true,
+   "recommendations": 2,
+   "transcript": true,
+   "interview": null,
+   "application_fee": null
+  },
+  "is_sweepstakes": false,
+  "type": null,
+  "start_date": null,
+  "end_date": null,
+  "application_deadline": null,
+  "location": null,
+  "is_online": null,
+  "cost": null,
+  "covers": [],
+  "apply_effort": [],
+  "capacity": null,
+  "published_applicants": 3100,
+  "raw_text": null,
+  "scraped_at": null
+ },
+ {
+  "id": "a869ad1520d4",
+  "kind": "scholarship",
+  "title": "Student-Athletes in Olympic Sports Award",
+  "provider": "Example Sports Foundation (FAKE)",
+  "url": "https://example.org/sample/5",
+  "source": "sample",
+  "summary": "For high school varsity athletes in Olympic sports such as fencing, rowing, or wrestling.",
+  "school_levels": [
+   "HS"
+  ],
+  "scope": "national",
+  "eligibility": {
+   "states": [],
+   "counties": [],
+   "class_years": [
+    "HS 12"
+   ],
+   "min_gpa": 3.2,
+   "citizenship": [],
+   "majors": [],
+   "identity_groups": [],
+   "need_based": null,
+   "min_age": null,
+   "max_age": null,
+   "gender": []
+  },
+  "focus_tags": [
+   "fencing",
+   "rowing",
+   "sports",
+   "student athlete",
+   "wrestling"
+  ],
+  "amount_min": 2500.0,
+  "amount_max": 2500.0,
+  "num_awards": 5,
+  "deadline": "2027-02-28",
+  "requirements": {
+   "essay": true,
+   "recommendations": 1,
+   "transcript": null,
+   "interview": null,
+   "application_fee": null
+  },
+  "is_sweepstakes": false,
+  "type": null,
+  "start_date": null,
+  "end_date": null,
+  "application_deadline": null,
+  "location": null,
+  "is_online": null,
+  "cost": null,
+  "covers": [],
+  "apply_effort": [],
+  "capacity": null,
+  "published_applicants": null,
+  "raw_text": null,
+  "scraped_at": null
+ },
+ {
+  "id": "fcc7f0ec4168",
+  "kind": "scholarship",
+  "title": "$10,000 No-Essay Scholarship Giveaway",
+  "provider": "Example Lead Gen Co (FAKE)",
+  "url": "https://example.org/sample/6",
+  "source": "sample",
+  "summary": "Enter with your email; random drawing.",
+  "school_levels": [
+   "HS",
+   "college"
+  ],
+  "scope": "national",
+  "eligibility": {
+   "states": [],
+   "counties": [],
+   "class_years": [],
+   "min_gpa": null,
+   "citizenship": [],
+   "majors": [],
+   "identity_groups": [],
+   "need_based": null,
+   "min_age": null,
+   "max_age": null,
+   "gender": []
+  },
+  "focus_tags": [],
+  "amount_min": 10000.0,
+  "amount_max": 10000.0,
+  "num_awards": 1,
+  "deadline": "2027-06-30",
+  "requirements": {
+   "essay": false,
+   "recommendations": null,
+   "transcript": null,
+   "interview": null,
+   "application_fee": null
+  },
+  "is_sweepstakes": true,
+  "type": null,
+  "start_date": null,
+  "end_date": null,
+  "application_deadline": null,
+  "location": null,
+  "is_online": null,
+  "cost": null,
+  "covers": [],
+  "apply_effort": [],
+  "capacity": null,
+  "published_applicants": null,
+  "raw_text": null,
+  "scraped_at": null
+ },
+ {
+  "id": "72489a02d546",
+  "kind": "scholarship",
+  "title": "Credit Union Financial Literacy Essay Contest",
+  "provider": "Example Federal Credit Union (FAKE)",
+  "url": "https://example.org/sample/7",
+  "source": "sample",
+  "summary": "Children of members write 500 words on saving money; top three win.",
+  "school_levels": [
+   "HS"
+  ],
+  "scope": "local",
+  "eligibility": {
+   "states": [
+    "CA"
+   ],
+   "counties": [
+    "Santa Clara County, CA"
+   ],
+   "class_years": [
+    "HS 9",
+    "HS 10",
+    "HS 11",
+    "HS 12"
+   ],
+   "min_gpa": null,
+   "citizenship": [],
+   "majors": [],
+   "identity_groups": [],
+   "need_based": null,
+   "min_age": null,
+   "max_age": null,
+   "gender": []
+  },
+  "focus_tags": [
+   "financial literacy",
+   "writing"
+  ],
+  "amount_min": 250.0,
+  "amount_max": 1000.0,
+  "num_awards": 3,
+  "deadline": "2027-03-20",
+  "requirements": {
+   "essay": true,
+   "recommendations": null,
+   "transcript": null,
+   "interview": null,
+   "application_fee": null
+  },
+  "is_sweepstakes": false,
+  "type": null,
+  "start_date": null,
+  "end_date": null,
+  "application_deadline": null,
+  "location": null,
+  "is_online": null,
+  "cost": null,
+  "covers": [],
+  "apply_effort": [],
+  "capacity": null,
+  "published_applicants": null,
+  "raw_text": null,
+  "scraped_at": null
+ },
+ {
+  "id": "10acdd2282f8",
+  "kind": "opportunity",
+  "title": "Women in STEM Day",
+  "provider": "Example Institute of Technology (FAKE)",
+  "url": "https://example.org/sample/8",
+  "source": "sample",
+  "summary": "Free day of lab tours, panels, and hands-on workshops for HS girls and nonbinary students.",
+  "school_levels": [
+   "HS"
+  ],
+  "scope": "local",
+  "eligibility": {
+   "states": [],
+   "counties": [],
+   "class_years": [
+    "HS 10",
+    "HS 11",
+    "HS 12"
+   ],
+   "min_gpa": null,
+   "citizenship": [],
+   "majors": [],
+   "identity_groups": [],
+   "need_based": null,
+   "min_age": null,
+   "max_age": null,
+   "gender": [
+    "female",
+    "nonbinary"
+   ]
+  },
+  "focus_tags": [
+   "engineering",
+   "stem",
+   "women in stem"
+  ],
+  "amount_min": null,
+  "amount_max": null,
+  "num_awards": null,
+  "deadline": null,
+  "requirements": {
+   "essay": null,
+   "recommendations": null,
+   "transcript": null,
+   "interview": null,
+   "application_fee": null
+  },
+  "is_sweepstakes": false,
+  "type": "outreach_event",
+  "start_date": "2027-02-06",
+  "end_date": "2027-02-06",
+  "application_deadline": "2027-01-15",
+  "location": {
+   "city": "Pasadena",
+   "state": "CA",
+   "zip": "91125",
+   "lat": null,
+   "lng": null
+  },
+  "is_online": false,
+  "cost": 0.0,
+  "covers": [
+   "food"
+  ],
+  "apply_effort": [
+   "short_form",
+   "essay"
+  ],
+  "capacity": 120,
+  "published_applicants": null,
+  "raw_text": null,
+  "scraped_at": null
+ },
+ {
+  "id": "be0d154ca5ae",
+  "kind": "opportunity",
+  "title": "High School Office Day",
+  "provider": "Example Tech Corp (FAKE)",
+  "url": "https://example.org/sample/9",
+  "source": "sample",
+  "summary": "Tour the office, meet engineers, and do a mini design sprint.",
+  "school_levels": [
+   "HS"
+  ],
+  "scope": "local",
+  "eligibility": {
+   "states": [
+    "CA"
+   ],
+   "counties": [],
+   "class_years": [
+    "HS 11",
+    "HS 12"
+   ],
+   "min_gpa": null,
+   "citizenship": [],
+   "majors": [],
+   "identity_groups": [],
+   "need_based": null,
+   "min_age": null,
+   "max_age": null,
+   "gender": []
+  },
+  "focus_tags": [
+   "careers",
+   "software",
+   "tech"
+  ],
+  "amount_min": null,
+  "amount_max": null,
+  "num_awards": null,
+  "deadline": null,
+  "requirements": {
+   "essay": null,
+   "recommendations": null,
+   "transcript": null,
+   "interview": null,
+   "application_fee": null
+  },
+  "is_sweepstakes": false,
+  "type": "company_visit",
+  "start_date": "2026-12-05",
+  "end_date": "2026-12-05",
+  "application_deadline": "2026-11-20",
+  "location": {
+   "city": "Mountain View",
+   "state": "CA",
+   "zip": "94043",
+   "lat": null,
+   "lng": null
+  },
+  "is_online": false,
+  "cost": 0.0,
+  "covers": [
+   "food"
+  ],
+  "apply_effort": [
+   "short_form"
+  ],
+  "capacity": 40,
+  "published_applicants": null,
+  "raw_text": null,
+  "scraped_at": null
+ },
+ {
+  "id": "18bac76d9a17",
+  "kind": "opportunity",
+  "title": "Youth Robotics Design Challenge",
+  "provider": "Example Robotics Co (FAKE)",
+  "url": "https://example.org/sample/10",
+  "source": "sample",
+  "summary": "Teams design a robot for a real-world task; finalists present to engineers.",
+  "school_levels": [
+   "HS"
+  ],
+  "scope": "online",
+  "eligibility": {
+   "states": [],
+   "counties": [],
+   "class_years": [
+    "HS 9",
+    "HS 10",
+    "HS 11",
+    "HS 12"
+   ],
+   "min_gpa": null,
+   "citizenship": [],
+   "majors": [],
+   "identity_groups": [],
+   "need_based": null,
+   "min_age": null,
+   "max_age": null,
+   "gender": []
+  },
+  "focus_tags": [
+   "design",
+   "engineering",
+   "robotics"
+  ],
+  "amount_min": null,
+  "amount_max": null,
+  "num_awards": null,
+  "deadline": null,
+  "requirements": {
+   "essay": null,
+   "recommendations": null,
+   "transcript": null,
+   "interview": null,
+   "application_fee": null
+  },
+  "is_sweepstakes": false,
+  "type": "competition",
+  "start_date": "2027-01-10",
+  "end_date": "2027-04-01",
+  "application_deadline": "2026-12-15",
+  "location": null,
+  "is_online": true,
+  "cost": 0.0,
+  "covers": [],
+  "apply_effort": [
+   "short_form"
+  ],
+  "capacity": null,
+  "published_applicants": null,
+  "raw_text": null,
+  "scraped_at": null
+ },
+ {
+  "id": "0b0694936488",
+  "kind": "opportunity",
+  "title": "Free Summer Research Program",
+  "provider": "Example State University (FAKE)",
+  "url": "https://example.org/sample/11",
+  "source": "sample",
+  "summary": "Six-week paid lab research for rising HS seniors, housing included.",
+  "school_levels": [
+   "HS"
+  ],
+  "scope": "national",
+  "eligibility": {
+   "states": [],
+   "counties": [],
+   "class_years": [
+    "HS 11"
+   ],
+   "min_gpa": null,
+   "citizenship": [
+    "US citizen",
+    "permanent resident"
+   ],
+   "majors": [],
+   "identity_groups": [
+    "first-gen",
+    "low-income"
+   ],
+   "need_based": null,
+   "min_age": null,
+   "max_age": null,
+   "gender": []
+  },
+  "focus_tags": [
+   "biology",
+   "research",
+   "stem"
+  ],
+  "amount_min": null,
+  "amount_max": null,
+  "num_awards": null,
+  "deadline": null,
+  "requirements": {
+   "essay": null,
+   "recommendations": null,
+   "transcript": null,
+   "interview": null,
+   "application_fee": null
+  },
+  "is_sweepstakes": false,
+  "type": "program",
+  "start_date": "2027-06-21",
+  "end_date": "2027-07-30",
+  "application_deadline": "2027-02-01",
+  "location": {
+   "city": "Columbus",
+   "state": "OH",
+   "zip": null,
+   "lat": null,
+   "lng": null
+  },
+  "is_online": false,
+  "cost": 0.0,
+  "covers": [
+   "lodging",
+   "food",
+   "stipend"
+  ],
+  "apply_effort": [
+   "essay",
+   "rec"
+  ],
+  "capacity": 25,
+  "published_applicants": null,
+  "raw_text": null,
+  "scraped_at": null
+ },
+ {
+  "id": "492e5978f523",
+  "kind": "opportunity",
+  "title": "Student Info Session: Careers in Data",
+  "provider": "Example Bank (FAKE)",
+  "url": "https://example.org/sample/12",
+  "source": "sample",
+  "summary": "Virtual info session and Q&A with data analysts.",
+  "school_levels": [
+   "HS",
+   "college"
+  ],
+  "scope": "online",
+  "eligibility": {
+   "states": [],
+   "counties": [],
+   "class_years": [],
+   "min_gpa": null,
+   "citizenship": [],
+   "majors": [],
+   "identity_groups": [],
+   "need_based": null,
+   "min_age": null,
+   "max_age": null,
+   "gender": []
+  },
+  "focus_tags": [
+   "careers",
+   "data science",
+   "finance"
+  ],
+  "amount_min": null,
+  "amount_max": null,
+  "num_awards": null,
+  "deadline": null,
+  "requirements": {
+   "essay": null,
+   "recommendations": null,
+   "transcript": null,
+   "interview": null,
+   "application_fee": null
+  },
+  "is_sweepstakes": false,
+  "type": "company_event",
+  "start_date": "2026-11-12",
+  "end_date": "2026-11-12",
+  "application_deadline": null,
+  "location": null,
+  "is_online": true,
+  "cost": 0.0,
+  "covers": [],
+  "apply_effort": [
+   "first_come"
+  ],
+  "capacity": null,
+  "published_applicants": null,
+  "raw_text": null,
+  "scraped_at": null
+ },
+ {
+  "id": "ce9de8789eab",
+  "kind": "opportunity",
+  "title": "Cal Hacks 13.0",
+  "provider": "MLH member event",
+  "url": "https://calhacks.io/",
+  "source": "mlh",
+  "summary": "MLH hackathon in San Francisco, California.",
+  "school_levels": [
+   "college"
+  ],
+  "scope": "local",
+  "eligibility": {
+   "states": [],
+   "counties": [],
+   "class_years": [],
+   "min_gpa": null,
+   "citizenship": [],
+   "majors": [],
+   "identity_groups": [],
+   "need_based": null,
+   "min_age": null,
+   "max_age": null,
+   "gender": []
+  },
+  "focus_tags": [
+   "coding",
+   "hackathon",
+   "hardware",
+   "software"
+  ],
+  "amount_min": null,
+  "amount_max": null,
+  "num_awards": null,
+  "deadline": null,
+  "requirements": {
+   "essay": null,
+   "recommendations": null,
+   "transcript": null,
+   "interview": null,
+   "application_fee": null
+  },
+  "is_sweepstakes": false,
+  "type": "hackathon",
+  "start_date": "2026-10-23",
+  "end_date": "2026-10-25",
+  "application_deadline": null,
+  "location": {
+   "city": "San Francisco",
+   "state": "CA",
+   "zip": null,
+   "lat": null,
+   "lng": null
+  },
+  "is_online": false,
+  "cost": 0.0,
+  "covers": [
+   "food"
+  ],
+  "apply_effort": [
+   "short_form"
+  ],
+  "capacity": null,
+  "published_applicants": null,
+  "raw_text": null,
+  "scraped_at": "2026-10-23T15:54:57.295599+00:00"
+ },
+ {
+  "id": "d3e0b3056f2d",
+  "kind": "opportunity",
+  "title": "SBUHacks",
+  "provider": "MLH member event",
+  "url": "https://hack.sbcs.io/",
+  "source": "mlh",
+  "summary": "MLH hackathon in Stony Brook, New York.",
+  "school_levels": [
+   "college"
+  ],
+  "scope": "local",
+  "eligibility": {
+   "states": [],
+   "counties": [],
+   "class_years": [],
+   "min_gpa": null,
+   "citizenship": [],
+   "majors": [],
+   "identity_groups": [],
+   "need_based": null,
+   "min_age": null,
+   "max_age": null,
+   "gender": []
+  },
+  "focus_tags": [
+   "coding",
+   "hackathon"
+  ],
+  "amount_min": null,
+  "amount_max": null,
+  "num_awards": null,
+  "deadline": null,
+  "requirements": {
+   "essay": null,
+   "recommendations": null,
+   "transcript": null,
+   "interview": null,
+   "application_fee": null
+  },
+  "is_sweepstakes": false,
+  "type": "hackathon",
+  "start_date": "2026-10-23",
+  "end_date": "2026-10-25",
+  "application_deadline": null,
+  "location": {
+   "city": "Stony Brook",
+   "state": "NY",
+   "zip": null,
+   "lat": null,
+   "lng": null
+  },
+  "is_online": false,
+  "cost": 0.0,
+  "covers": [
+   "food"
+  ],
+  "apply_effort": [
+   "short_form"
+  ],
+  "capacity": null,
+  "published_applicants": null,
+  "raw_text": null,
+  "scraped_at": "2026-10-23T15:54:57.295599+00:00"
+ },
+ {
+  "id": "30b3558b6396",
+  "kind": "opportunity",
+  "title": "OxHack '26",
+  "provider": "MLH member event",
+  "url": "https://26.oxhack.net/",
+  "source": "mlh",
+  "summary": "MLH hackathon in Oxford, England.",
+  "school_levels": [
+   "college"
+  ],
+  "scope": "local",
+  "eligibility": {
+   "states": [],
+   "counties": [],
+   "class_years": [],
+   "min_gpa": null,
+   "citizenship": [],
+   "majors": [],
+   "identity_groups": [],
+   "need_based": null,
+   "min_age": null,
+   "max_age": null,
+   "gender": []
+  },
+  "focus_tags": [
+   "coding",
+   "hackathon"
+  ],
+  "amount_min": null,
+  "amount_max": null,
+  "num_awards": null,
+  "deadline": null,
+  "requirements": {
+   "essay": null,
+   "recommendations": null,
+   "transcript": null,
+   "interview": null,
+   "application_fee": null
+  },
+  "is_sweepstakes": false,
+  "type": "hackathon",
+  "start_date": "2026-10-24",
+  "end_date": "2026-10-25",
+  "application_deadline": null,
+  "location": {
+   "city": "Oxford",
+   "state": null,
+   "zip": null,
+   "lat": null,
+   "lng": null
+  },
+  "is_online": false,
+  "cost": 0.0,
+  "covers": [
+   "food"
+  ],
+  "apply_effort": [
+   "short_form"
+  ],
+  "capacity": null,
+  "published_applicants": null,
+  "raw_text": null,
+  "scraped_at": "2026-10-23T15:54:57.295599+00:00"
+ },
+ {
+  "id": "7148862eda70",
+  "kind": "opportunity",
+  "title": "HackTX 26",
+  "provider": "MLH member event",
+  "url": "https://hacktx.com/",
+  "source": "mlh",
+  "summary": "MLH hackathon in Austin, TX.",
+  "school_levels": [
+   "college"
+  ],
+  "scope": "local",
+  "eligibility": {
+   "states": [],
+   "counties": [],
+   "class_years": [],
+   "min_gpa": null,
+   "citizenship": [],
+   "majors": [],
+   "identity_groups": [],
+   "need_based": null,
+   "min_age": null,
+   "max_age": null,
+   "gender": []
+  },
+  "focus_tags": [
+   "coding",
+   "hackathon"
+  ],
+  "amount_min": null,
+  "amount_max": null,
+  "num_awards": null,
+  "deadline": null,
+  "requirements": {
+   "essay": null,
+   "recommendations": null,
+   "transcript": null,
+   "interview": null,
+   "application_fee": null
+  },
+  "is_sweepstakes": false,
+  "type": "hackathon",
+  "start_date": "2026-10-24",
+  "end_date": "2026-10-25",
+  "application_deadline": null,
+  "location": {
+   "city": "Austin",
+   "state": "TX",
+   "zip": null,
+   "lat": null,
+   "lng": null
+  },
+  "is_online": false,
+  "cost": 0.0,
+  "covers": [
+   "food"
+  ],
+  "apply_effort": [
+   "short_form"
+  ],
+  "capacity": null,
+  "published_applicants": null,
+  "raw_text": null,
+  "scraped_at": "2026-10-23T15:54:57.295599+00:00"
+ },
+ {
+  "id": "73d27eecec2f",
+  "kind": "opportunity",
+  "title": "DeveloperWeek 2027 Hackathon",
+  "provider": "DevNetwork",
+  "url": "https://developerweek-2027-hackathon.devpost.com/",
+  "source": "devpost",
+  "summary": "Hackathon (Santa Clara Convention Center + Online). Prizes: $6,000. 238 registered.",
+  "school_levels": [],
+  "scope": "local",
+  "eligibility": {
+   "states": [],
+   "counties": [],
+   "class_years": [],
+   "min_gpa": null,
+   "citizenship": [],
+   "majors": [],
+   "identity_groups": [],
+   "need_based": null,
+   "min_age": null,
+   "max_age": null,
+   "gender": []
+  },
+  "focus_tags": [
+   "coding",
+   "enterprise",
+   "hackathon",
+   "iot",
+   "machine learning/ai"
+  ],
+  "amount_min": null,
+  "amount_max": null,
+  "num_awards": null,
+  "deadline": null,
+  "requirements": {
+   "essay": null,
+   "recommendations": null,
+   "transcript": null,
+   "interview": null,
+   "application_fee": null
+  },
+  "is_sweepstakes": false,
+  "type": "hackathon",
+  "start_date": "2027-01-25",
+  "end_date": "2027-02-11",
+  "application_deadline": null,
+  "location": {
+   "city": "Santa Clara Convention Center + Online",
+   "state": null,
+   "zip": null,
+   "lat": null,
+   "lng": null
+  },
+  "is_online": false,
+  "cost": 0.0,
+  "covers": [],
+  "apply_effort": [
+   "short_form"
+  ],
+  "capacity": null,
+  "published_applicants": 238,
+  "raw_text": null,
+  "scraped_at": "2026-10-23T15:54:57.299699+00:00"
+ },
+ {
+  "id": "be1ef88f1a9e",
+  "kind": "opportunity",
+  "title": "Cal Hacks 13.0",
+  "provider": "Cal Hacks",
+  "url": "https://cal-hacks-13-0.devpost.com/",
+  "source": "devpost",
+  "summary": "Hackathon (Palace of Fine Arts). Prizes: $83,328. 214 registered.",
+  "school_levels": [],
+  "scope": "local",
+  "eligibility": {
+   "states": [],
+   "counties": [],
+   "class_years": [],
+   "min_gpa": null,
+   "citizenship": [],
+   "majors": [],
+   "identity_groups": [],
+   "need_based": null,
+   "min_age": null,
+   "max_age": null,
+   "gender": []
+  },
+  "focus_tags": [
+   "beginner friendly",
+   "coding",
+   "hackathon",
+   "open ended",
+   "social good"
+  ],
+  "amount_min": null,
+  "amount_max": null,
+  "num_awards": null,
+  "deadline": null,
+  "requirements": {
+   "essay": null,
+   "recommendations": null,
+   "transcript": null,
+   "interview": null,
+   "application_fee": null
+  },
+  "is_sweepstakes": false,
+  "type": "hackathon",
+  "start_date": "2026-10-23",
+  "end_date": "2026-10-25",
+  "application_deadline": null,
+  "location": {
+   "city": "Palace of Fine Arts",
+   "state": null,
+   "zip": null,
+   "lat": null,
+   "lng": null
+  },
+  "is_online": false,
+  "cost": 0.0,
+  "covers": [],
+  "apply_effort": [
+   "short_form"
+  ],
+  "capacity": null,
+  "published_applicants": 214,
+  "raw_text": null,
+  "scraped_at": "2026-10-23T15:54:57.299699+00:00"
+ },
+ {
+  "id": "5504f54798af",
+  "kind": "opportunity",
+  "title": "Gator Hack V - AI Days 2026",
+  "provider": "University of Florida",
+  "url": "https://gatorhack2026.devpost.com/",
+  "source": "devpost",
+  "summary": "Hackathon (Newell Hall, University of Florida). Prizes: $6,000. 199 registered.",
+  "school_levels": [],
+  "scope": "local",
+  "eligibility": {
+   "states": [],
+   "counties": [],
+   "class_years": [],
+   "min_gpa": null,
+   "citizenship": [],
+   "majors": [],
+   "identity_groups": [],
+   "need_based": null,
+   "min_age": null,
+   "max_age": null,
+   "gender": []
+  },
+  "focus_tags": [
+   "coding",
+   "education",
+   "hackathon"
+  ],
+  "amount_min": null,
+  "amount_max": null,
+  "num_awards": null,
+  "deadline": null,
+  "requirements": {
+   "essay": null,
+   "recommendations": null,
+   "transcript": null,
+   "interview": null,
+   "application_fee": null
+  },
+  "is_sweepstakes": false,
+  "type": "hackathon",
+  "start_date": "2026-10-23",
+  "end_date": "2026-10-25",
+  "application_deadline": null,
+  "location": {
+   "city": "Newell Hall, University of Florida",
+   "state": null,
+   "zip": null,
+   "lat": null,
+   "lng": null
+  },
+  "is_online": false,
+  "cost": 0.0,
+  "covers": [],
+  "apply_effort": [
+   "short_form"
+  ],
+  "capacity": null,
+  "published_applicants": 199,
+  "raw_text": null,
+  "scraped_at": "2026-10-23T15:54:57.299699+00:00"
+ },
+ {
+  "id": "a018dbaea94a",
+  "kind": "opportunity",
+  "title": "LarpHacks",
+  "provider": "larphacks",
+  "url": "https://larphacks.devpost.com/",
+  "source": "devpost",
+  "summary": "Hackathon (Toronto). Prizes: $21,394. 154 registered.",
+  "school_levels": [],
+  "scope": "local",
+  "eligibility": {
+   "states": [],
+   "counties": [],
+   "class_years": [],
+   "min_gpa": null,
+   "citizenship": [],
+   "majors": [],
+   "identity_groups": [],
+   "need_based": null,
+   "min_age": null,
+   "max_age": null,
+   "gender": []
+  },
+  "focus_tags": [
+   "beginner friendly",
+   "coding",
+   "hackathon",
+   "machine learning/ai",
+   "web"
+  ],
+  "amount_min": null,
+  "amount_max": null,
+  "num_awards": null,
+  "deadline": null,
+  "requirements": {
+   "essay": null,
+   "recommendations": null,
+   "transcript": null,
+   "interview": null,
+   "application_fee": null
+  },
+  "is_sweepstakes": false,
+  "type": "hackathon",
+  "start_date": "2026-11-01",
+  "end_date": "2026-11-01",
+  "application_deadline": null,
+  "location": {
+   "city": "Toronto",
+   "state": null,
+   "zip": null,
+   "lat": null,
+   "lng": null
+  },
+  "is_online": false,
+  "cost": 0.0,
+  "covers": [],
+  "apply_effort": [
+   "short_form"
+  ],
+  "capacity": null,
+  "published_applicants": 154,
+  "raw_text": null,
+  "scraped_at": "2026-10-23T15:54:57.299699+00:00"
+ }
+]
