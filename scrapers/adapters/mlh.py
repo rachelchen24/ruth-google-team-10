@@ -7,29 +7,10 @@ from datetime import datetime, timezone
 from bs4 import BeautifulSoup
 
 from .. import fetch
+from ..geo import state_code
 from ..schema import Listing, Location
 
 SEASON_URL = "https://www.mlh.com/seasons/{season}/events"
-
-US_STATES = {
-    "alabama": "AL", "alaska": "AK", "arizona": "AZ", "arkansas": "AR", "california": "CA", "colorado": "CO",
-    "connecticut": "CT", "delaware": "DE", "florida": "FL", "georgia": "GA", "hawaii": "HI", "idaho": "ID",
-    "illinois": "IL", "indiana": "IN", "iowa": "IA", "kansas": "KS", "kentucky": "KY", "louisiana": "LA",
-    "maine": "ME", "maryland": "MD", "massachusetts": "MA", "michigan": "MI", "minnesota": "MN",
-    "mississippi": "MS", "missouri": "MO", "montana": "MT", "nebraska": "NE", "nevada": "NV",
-    "new hampshire": "NH", "new jersey": "NJ", "new mexico": "NM", "new york": "NY", "north carolina": "NC",
-    "north dakota": "ND", "ohio": "OH", "oklahoma": "OK", "oregon": "OR", "pennsylvania": "PA",
-    "rhode island": "RI", "south carolina": "SC", "south dakota": "SD", "tennessee": "TN", "texas": "TX",
-    "utah": "UT", "vermont": "VT", "virginia": "VA", "washington": "WA", "west virginia": "WV",
-    "wisconsin": "WI", "wyoming": "WY", "district of columbia": "DC",
-}
-
-
-def state_code(s: str | None) -> str | None:
-    if not s:
-        return None
-    s = s.strip()
-    return s.upper() if len(s) == 2 else US_STATES.get(s.lower())
 
 
 def fetch_listings(season: int = 2027) -> list[Listing]:
